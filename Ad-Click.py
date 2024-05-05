@@ -57,7 +57,7 @@ plt.xticks(rotation=60);
 
 from sklearn.model_selection import train_test_split
 train,test=train_test_split(df,test_size=0.2,random_state=42)
-Target Distribution
+#Target Distribution
 
 sns.countplot(data=df,x='Clicked on Ad');
 
