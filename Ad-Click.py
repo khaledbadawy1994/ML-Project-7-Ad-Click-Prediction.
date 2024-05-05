@@ -312,7 +312,7 @@ pd.DataFrame({'Algorithm':['Logistic Regression','Decision Tree','Random Forest'
              'K-Fold Accuracy':[log_results.mean(),dec_results.mean(),
                                ran_results.mean(),nn_results.mean()]})
 
-Let's use another technique for assessing accuracy:
+#Let's use another technique for assessing accuracy:
 
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -341,7 +341,7 @@ RandomForestClassifier()
 
 MLPClassifier()
 
-We'll use Random Forest for now, it has consistently the best results.
+#We'll use Random Forest for now, it has consistently the best results.
 
 model = ran
 
@@ -363,14 +363,14 @@ MLPClassifier()
 
 logpredictions = log.predict(X_test)
 
-logpredictions
+#logpredictions
 
-For better parameters we will apply GridSearch
+#For better parameters we will apply GridSearch
 
 from sklearn.model_selection import GridSearchCV
 param_grid = {'C': [0.1,1,10,100,1000]}
 
-Logistic Regression
+#Logistic Regression
 
 grid_log= GridSearchCV(LogisticRegression(),param_grid,refit=True, verbose=2)
 
@@ -390,9 +390,9 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 print(confusion_matrix(y_test,pred_log))
 print(classification_report(y_test,pred_log))
 
-Let's compare it with other Classification Models!
+#Let's compare it with other Classification Models!
 
-DecisionTreeClassifier
+#DecisionTreeClassifier
 
 from sklearn.model_selection import cross_validate
 cross_validate(DecisionTreeClassifier(),X_train,y_train)
@@ -410,7 +410,7 @@ y_pred = dec_tree.predict(X_test)
 
 y_pred
 
-Random Forest
+#Random Forest
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -432,14 +432,14 @@ y_pred = regr_model.predict(X_test)
 
 y_pred
 
-Support Vector Model
+#Support Vector Model
 
 from sklearn.svm import SVC
 svc= SVC(gamma='scale')
 
 svc.fit(X_train,y_train)
 
-For better parameters we need to apply GridSearch
+#For better parameters we need to apply GridSearch
 
 param_grid = {'C': [0.1,1,10,100,1000,5000]}
 
@@ -455,9 +455,9 @@ print(classification_report(y_test,pred_svc))
 
 pred_svc
 
-It does perform better but a slight less than Random Forest Model.
+#It does perform better but a slight less than Random Forest Model.
 
-Naive Bayes
+#Naive Bayes
 
 from sklearn.naive_bayes import GaussianNB
 
@@ -470,7 +470,7 @@ print(classification_report(y_test,nb_predict))
 
 nb_predict
 
-KNN Classifier
+#KNN Classifier
 
 cross_validation(KNeighborsClassifier(),X_train,y_train,5)
 
@@ -486,7 +486,7 @@ print(classification_report(y_test,knn_predict))
 
 knn_predict
 
-XGBoost Classifier
+#XGBoost Classifier
 
 xgb_clf = XGBClassifier(n_estimators = 100 ,n_jobs = -1 ,random_state = 42)
 
@@ -501,7 +501,7 @@ print(classification_report(y_test,xgb_clf_predict))
 
 xgb_clf_predict
 
-AdaBoost Classifier
+#AdaBoost Classifier
 
 ada_clf = AdaBoostClassifier(DecisionTreeClassifier(),n_estimators=100,random_state=42)
 
@@ -511,13 +511,13 @@ ada_clf.fit(X_train,y_train)
 
 model_evaluation(ada_clf,X_test,y_test,'Greens')
 
-Conclusion
+#Conclusion
 
-The best estimator is naive bias and XGB with accurracy of 0.98 on test set. Daily internet usage and Daily time spent on site have very strong negative correlation with the target. Age and Area income have moderate positive correlation with the target. Gender has no effect on the target.
+#The best estimator is naive bias and XGB with accurracy of 0.98 on test set. Daily internet usage and Daily time spent on site have very strong negative correlation with the target. Age and Area income have moderate positive correlation with the target. Gender has no effect on the target.
 
-Based on the above we see that XGB Classifier and Naive Bayes Classifier perfomed the best among the above.
+#Based on the above we see that XGB Classifier and Naive Bayes Classifier perfomed the best among the above.
 
-naive bias and XGB have the best accuracy with 0.98 on test data and f1 score=0.94 and f1 score=0.98
+#naive bias and XGB have the best accuracy with 0.98 on test data and f1 score=0.94 and f1 score=0.98
 
 with open("best_estimator.pkl",'wb') as file:
     pickle.dump(svc,file)
