@@ -19,9 +19,9 @@ df.describe()
 
 df.describe(include='O')
 
-Ad Topic Line are all unique so we will drop it
+# Ad Topic Line are all unique so we will drop it
 
-City mostly doesn't change so we will drop it too `
+# City mostly doesn't change so we will drop it too `
 
 df=df.drop(columns=['City','Ad Topic Line'],axis=1)
 df.head()
@@ -33,7 +33,7 @@ df.head()
 
 df['Date'].min(),df['Date'].max()
 
-All Data is in the Same Year so year is not important
+# All Data is in the Same Year so year is not important
 
 df.isna().sum()
 
@@ -43,7 +43,7 @@ df.select_dtypes('object').nunique()
 
 df.describe()
 
-Features Distribution
+# Features Distribution
 
 num_features = df.select_dtypes('number').columns.drop('Clicked on Ad')
 fig,ax = plt.subplots(1,5,figsize=(25,5))
@@ -61,9 +61,9 @@ Target Distribution
 
 sns.countplot(data=df,x='Clicked on Ad');
 
-Target Classes are balanced.
+# Target Classes are balanced.
 
-Features Correlation with Target
+# Features Correlation with Target
 
 fig,ax = plt.subplots(1,5,figsize=(25,5))
 for i,col in enumerate(num_features):
@@ -81,13 +81,13 @@ sns.jointplot(x=df['Age'],y=df['Daily Time Spent on Site'],kind='kde',height=12)
 
 sns.pairplot(data=df,hue='Clicked on Ad')
 
-We can see that daily less internet usage tends to click on ad more.
+# We can see that daily less internet usage tends to click on ad more.
 
 #Lets see Click on Ad features based on Sex
 plt.figure(figsize=(10,6))
 sns.countplot(x='Clicked on Ad',data=df,hue='Male',palette='coolwarm')
 
-Female tends to click more on Ads!
+# Female tends to click more on Ads!
 
 #Distribution of top 12 country's df clicks based on Sex
 plt.figure(figsize=(15,6))
@@ -96,7 +96,7 @@ sns.countplot(x='Country',data=df[df['Clicked on Ad']==1],order=df[df['Clicked o
 plt.title('Ad clicked country distribution')
 plt.tight_layout()
 
-Most are developing countries and females are the active contributors.
+# Most are developing countries and females are the active contributors.
 
 df
 
@@ -111,21 +111,21 @@ plt.figure(figsize=(15,6))
 sns.countplot(x='Hour',data=df[df['Clicked on Ad']==1],hue='Male',palette='rainbow')
 plt.title('Ad clicked hourly distribution')
 
-As we can see with uneven daytime frequency, females are the main contributor exceeding males several hours.
+# As we can see with uneven daytime frequency, females are the main contributor exceeding males several hours.
 
 #Daily distribution of ad clicks
 plt.figure(figsize=(15,6))
 sns.countplot(x='DayofWeek',data=df[df['Clicked on Ad']==1],hue='Male',palette='rainbow')
 plt.title('Ad clicked daily distribution')
 
-Most of the Days Ladies click ad more than Males except Wednesdays and Thursdays.
+#Most of the Days Ladies click ad more than Males except Wednesdays and Thursdays.
 
 #Monthly distribution of ad clicks
 plt.figure(figsize=(15,6))
 sns.countplot(x='Month',data=df[df['Clicked on Ad']==1],hue='Male',palette='rainbow')
 plt.title('Ad clicked monthly distribution')
 
-Throughout the Year Ladies click on Ad the most except month of March.
+#Throughout the Year Ladies click on Ad the most except month of March.
 
 #Now we shall group by date and see the
 plt.figure(figsize=(15,6))
@@ -136,7 +136,7 @@ plt.tight_layout()
 #Top df clicked on specific date
 df[df['Clicked on Ad']==1]['Date'].value_counts().head(5)
 
-On 14th February 2016 we see most (8) clicks on ad. So Valentine Day is the best selling day for the Company's Ad.
+#On 14th February 2016 we see most (8) clicks on ad. So Valentine Day is the best selling day for the Company's Ad.
 
 df
 
@@ -144,25 +144,25 @@ df
 plt.figure(figsize=(10,6))
 sns.distplot(df['Age'],kde=False,bins=40)
 
-Most of them are around 30 years. But is this age group clicking most on Ad?
+#Most of them are around 30 years. But is this age group clicking most on Ad?
 
 #Lets see Age distribution
 plt.figure(figsize=(10,6))
 sns.swarmplot(x=df['Clicked on Ad'],y= df['Age'],data=df,palette='coolwarm')
 plt.title('Age wise distribution of Ad clicks')
 
-As its clear from above that around 40 years population are the most contributor to ad clickings and not around 30 years.
+#As its clear from above that around 40 years population are the most contributor to ad clickings and not around 30 years.
 
-As we can see people around 30 years population devote lot of their time on internet and on the site, but they don't click on Ads that frequent. Comapred to them, around 40 years population spend a bit less time but click on Ads more.
+#As we can see people around 30 years population devote lot of their time on internet and on the site, but they don't click on Ads that frequent. Comapred to them, around 40 years population spend a bit less time but click on Ads more.
 
 #Lets see the distribution who clicked on Ad based on area income of sex
 plt.figure(figsize=(10,6))
 sns.violinplot(x=df['Male'],y=df['Area Income'],data=df,palette='viridis',hue='Clicked on Ad')
 plt.title('Clicked on Ad distribution based on area distribution')
 
-Both Males and Females with Area income less than 50k are main customers of Ad. As almost all whose income more than 60k are not interested on clicking on Ad.
+#Both Males and Females with Area income less than 50k are main customers of Ad. As almost all whose income more than 60k are not interested on clicking on Ad.
 
-Thus in conclusion, mostly around 40 years Female within income group less than 50k in developing countries are the main consumers of Ad, clicking unevenly throughout the day and mostly during Fridays and Sundays
+#Thus in conclusion, mostly around 40 years Female within income group less than 50k in developing countries are the main consumers of Ad, clicking unevenly throughout the day and mostly during Fridays and Sundays
 
 df
 
@@ -170,22 +170,22 @@ df1=df.drop(['Country','Date'],axis=1)
 
 sns.heatmap(df1.corr(),annot=True,cmap='Blues');
 
-Now, with these observations, let’s build our logistic regression model to predict ad click probability.
+#Now, with these observations, let’s build our logistic regression model to predict ad click probability.
 
-Model Building We are going to use the logistic regression model because it’s easy to implement and very efficient to train. I’d suggest taking logistic regression as a benchmark, experimenting with more complex algorithms, and checking the improvement rooms.
+#Model Building We are going to use the logistic regression model because it’s easy to implement and very efficient to train. I’d suggest taking logistic regression as a benchmark, experimenting with more complex algorithms, and checking the improvement rooms.
 
-We will consider the following features for our model because, from the correlation matrix, we saw that these are the influencing factors for predicting advertisement clicks.
+#We will consider the following features for our model because, from the correlation matrix, we saw that these are the influencing factors for predicting advertisement clicks.
 
-Daily Time Spent on Site
+#Daily Time Spent on Site
 
-Age
-Area Income
-Daily Internet Usage
-Male (gender)
+#Age
+#Area Income
+#Daily Internet Usage
+#Male (gender)
 
-Now, you know the steps. First, select the feature columns and the label then split the dataset into random train and test subsets with scikit-learn’s handy train_test_split function. After that, build and train a machine learning model. For us, it is a logistic regression model.
+#Now, you know the steps. First, select the feature columns and the label then split the dataset into random train and test subsets with scikit-learn’s handy train_test_split function. After that, build and train a machine learning model. For us, it is a logistic regression model.
 
-Note: We don’t need to standardize our dataset before training the model because logistic regression is not that sensitive to the different scales of features.
+#Note: We don’t need to standardize our dataset before training the model because logistic regression is not that sensitive to the different scales of features.
 
 #Lets take country value as dummies
 country= pd.get_dummies(df['Country'],drop_first=True)
@@ -193,12 +193,12 @@ country= pd.get_dummies(df['Country'],drop_first=True)
 #Now lets join the dummy values
 df = pd.concat([df,country],axis=1)
 
-Fitting Data
+#Fitting Data
 
-Training Model
+#Training Model
 
 def model_evaluation(model, X_test, y_test, color='Blues'):
-    """
+   """
     This function evaluates the performance of a trained model on the test set.
 
     Args:
