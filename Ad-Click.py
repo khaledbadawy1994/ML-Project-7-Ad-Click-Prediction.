@@ -215,9 +215,9 @@ y_pred_test = model.predict(X_test)
 
     # Classification report
 print('--------------------------------------------------------------')
-    print("Classification Report:")
-    print(classification_report(y_test, y_pred_test))
-    print('--------------------------------------------------------------')
+print("Classification Report:")
+print(classification_report(y_test, y_pred_test))
+print('--------------------------------------------------------------')
     # Confusion matrix
     plt.figure(figsize=(5, 4))
     sns.heatmap(confusion_matrix(y_test, y_pred_test), annot=True, cmap=color)
