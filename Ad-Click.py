@@ -211,7 +211,7 @@ def model_evaluation(model, X_test, y_test, color='Blues'):
         None
     """
     # Make predictions on the test set
-    y_pred_test = model.predict(X_test)
+y_pred_test = model.predict(X_test)
 
     # Classification report
     print('--------------------------------------------------------------')
